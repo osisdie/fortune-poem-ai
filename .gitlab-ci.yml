@@ -9,7 +9,7 @@ lint:python:
   image: python:3.10-slim
   script:
     - pip install "flake8>=7.0"
-    - flake8 --config .flake8 .
+    - flake8 --config .flake8 --exclude='*.ipynb,node_modules' --filename='*.py' .
 
 lint:frontend:
   stage: lint
@@ -42,7 +42,7 @@ build:docker:
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   script:
-    - docker build -t bless-you-app .
+    - docker build -t fortune-poem-ai .
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == "main"

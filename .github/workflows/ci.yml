@@ -38,7 +38,7 @@ jobs:
   build-frontend:
     name: Build Frontend (Next.js)
     runs-on: ubuntu-latest
-    needs: lint-frontend
+    needs: [lint-python, lint-frontend]
     defaults:
       run:
         working-directory: web

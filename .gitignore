@@ -14,8 +14,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -63,3 +63,35 @@ target/
 .ipynb_checkpoints/
 
 output/
+
+# Environment
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Node.js / Next.js
+node_modules/
+.next/
+out/
+.vercel/
+web/.next/
+web/node_modules/
+web/out/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Firebase
+firebase-debug.log
+
+# Playwright MCP
+.playwright-mcp/
+
+# Claude Code local settings
+.claude/settings.local.json

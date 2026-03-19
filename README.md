@@ -19,210 +19,179 @@
   </text>
 </svg>
 
-# About Project
+# Bless You — RAG + Knowledge Graph + LLM Chatbot for Fortune Stick Interpretation
 
-籤詩文化是華人社會深厚的傳統，透過神諭指引人們面對人生的困惑。本專案試圖將古老的籤詩文化與現代科技結合，利用人工智慧技術，提供使用者更便捷、更深入的解籤體驗，讓傳統文化得以在現代社會中煥發新光彩。
+**[中文版 README](./README.zh-TW.md)**
 
-人工智慧技術的快速發展為各行各業帶來了革新。本專案將 AI 應用於傳統的籤詩文化中，旨在探索 AI 在文化領域的潛力。透過結合[RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)、[LLM](https://en.wikipedia.org/wiki/Large_language_model)、[Chatbot](https://en.wikipedia.org/wiki/Chatbot) 與[知識圖](https://en.wikipedia.org/wiki/Knowledge_graph)等技術，我們期望能打造一個智能化的解籤平台，輔助使用者更深入地理解籤詩。然而，由於籤詩解讀具有高度主觀性，AI 提供的結果僅供參考，不應完全作為決策的唯一依據。
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
+[![Gradio](https://img.shields.io/badge/Gradio-4.0+-orange.svg)](https://gradio.app)
+[![Neo4j](https://img.shields.io/badge/Neo4j-5.x-green.svg)](https://neo4j.com)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
 
-注意事項：
-AI 解籤的局限性： 籤詩解讀牽涉到文化、宗教、哲學等多方面因素，AI 模型雖然能提供客觀的分析，但無法完全取代人類的智慧和經驗。
-使用者主觀判斷： 最終的解讀仍需結合個人的直覺、經驗和當下的處境來綜合判斷。
+> **[Try the Live Demo](https://fortune-poem-ai.vercel.app)** | Traditional Chinese fortune stick culture meets modern AI
 
-Fortune stick culture, deeply rooted in Chinese-speaking societies, offers divine guidance to navigate life’s uncertainties. As interpretations of fortune stick verses evolve with time, this project integrates this ancient tradition with modern technology. By utilizing artificial intelligence (AI), we aim to provide users with a more accessible and insightful interpretation experience, ensuring the relevance and vibrancy of this cultural practice in today’s society.
+![Web UI](./images/webui-app.png)
 
-This project explores the application of AI in cultural domains, combining advanced technologies such as [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation), Large Language Models ([LLM](https://en.wikipedia.org/wiki/Large_language_model)), [chatbot](https://en.wikipedia.org/wiki/Chatbot), and knowledge graph ([KG](https://en.wikipedia.org/wiki/Knowledge_graph)). Our goal is to create an intelligent platform that not only delivers precise textual interpretations but also fosters interactive exploration of the deeper meanings behind fortune sticks. However, personal reflection remains key, with AI serving as a complementary tool.
+---
 
+## About
 
-<br>
-<br>
+籤詩文化是華人社會深厚的傳統，透過神諭指引人們面對人生的困惑。本專案將古老的籤詩文化與現代科技結合，利用人工智慧技術，提供更便捷、更深入的解籤體驗。
 
-# Technique / Tools
+Fortune stick culture, deeply rooted in Chinese-speaking societies, offers divine guidance to navigate life's uncertainties. This project integrates this ancient tradition with modern technology — combining **RAG**, **Knowledge Graph**, **LLM**, and **BERT embeddings** — to create an intelligent interpretation platform for 100 poems from [Longshan Temple (龍山寺)](https://www.lungshan.org.tw/).
 
-| **Technology/Tool** | **Purpose** | **Description** |
-|---|---|---|
-| BeautifulSoup | Web Scraping | Scrapes data from websites, such as poetry databases. |
-| JSON/CSV | Data Storage | Stores processed data in standardized formats for easy analysis and use. |
-| Pandas | Data Processing | Cleans, transforms, and analyzes data, e.g., removing duplicates, filling missing values. |
-| networkx | Knowledge Graph Visualization | Visualizes knowledge graphs to understand complex relationships. |
-| OCR | Optical Character Recognition | Extracts text from images, such as scanned poems. |
-| Data Augmentation | Data Expansion | Generates additional training data by transforming existing data, improving model generalization. |
-| ckiplab/bert-base-chinese | Natural Language Processing | Fine-tunes a pre-trained language model to better understand the intent and context of queries. |
-| Word Embedding | Text Vectorization | Converts text into numerical representations, enabling machine learning models to process text. |
-| Neo4j | Knowledge Graph Database | Builds a graph database to store and query knowledge, such as relationships between poems. |
-| LLM API | Large Language Model API | Utilizes powerful language models to generate more natural and expressive responses. |
-| Gradio | Web Interface | Creates a user-friendly web interface for interacting with the model. |
+> **Note**: AI interpretations are for reference only. Fortune stick culture is a cherished tradition — please approach with respect.
 
-<br>
-<br>
+---
 
-# About Graph+RAG
+## Quick Start
 
-**Dynamic Graph Updates with User Interactions**
+### Option 1: Docker (Recommended)
 
-When users ask questions, the graph dynamically updates in real time.
+```bash
+# Clone the repo
+git clone https://github.com/osisdie/fortune-poem-ai.git
+cd fortune-poem-ai
 
-For example, after interacting with the system, **Poem #27** now has two additional `HAS_PROMPT` **UserPrompt** nodes linked to their corresponding **LLM** nodes via the `GENERATED_BY` relationship. These nodes also include `purpose_embedding` and `answer_embedding` data, which are used for similarity-based searches.
+# Configure environment
+cp .env.example .env
+# Edit .env with your API keys
 
-You can perform a similarity search (e.g., top 1 to 3 matches, based on your preference) within the same poem's questions. If a match exceeds a similarity threshold (e.g., `0.75`), the system can return the existing LLM response directly.
+# Launch app + Neo4j
+docker compose up -d
+```
 
-![Neo4j Embedding Example](./images/neo4j-embedding.png)
+Visit `http://localhost:7860` for the Gradio app and `http://localhost:7474` for the Neo4j dashboard.
 
-<br>
-<br>
+### Option 2: Manual Setup
 
-# Preprocessing
+```bash
+# Install Python dependencies
+pip install -r requirements.txt
 
-## **1.Web Crawler**
+# Start Neo4j separately (or use Docker: docker compose up neo4j -d)
 
-**1.1 Use a web crawler** to collect data on 100 poems, including their text and images.
+# Run the preprocessing notebooks (see Preprocessing section below)
+# Then launch the Gradio app notebook:
+jupyter notebook bless_u-chatbot-100.ipynb
+```
 
-> Implementation: [step1-bless_u-crawler](./pre-process/step1-bless_u-crawler.ipynb)
+### Option 3: Web Demo (No setup required)
 
-**1.2 The output** includes the JSON file [all_chances.json](./data/all_chances.json) and a knowledge graph overview generated using NetworkX.
+Visit the [Next.js showcase site](https://fortune-poem-ai.vercel.app) to browse all 100 poems and try the interactive fortune-drawing demo — no API keys or database required.
 
-### **Poem Categories**
+---
 
-- **Good Poems**: 30 poems in total.
-  ![Good Poems Knowledge Graph](./images/knowledge_graph_group_good_30.png)
-- **Normal Poems**: 50 poems in total.
-  ![Normal Poems Knowledge Graph](./images/knowledge_graph_group_normal_50.png)
-- **Bad Poems**: 20 poems in total.
-  ![Bad Poems Knowledge Graph](./images/knowledge_graph_group_bad_20.png)
-
-
-<br>
-<br>
-
-## **2.LLM for Expanded Poem Interpretations**
-
-**2.1 Generate additional `UserPrompt`** data using LLMs by specifying parameters such as `model`, `temperature`, and `max_tokens`. This step is optional; the system can auto-generate prompts at runtime during user interaction.
-
-> Implementation: [step2-bless_u-LLM-poem-answers-gen](./pre-process/step2-bless_u-LLM-poem-answers-gen.ipynb)
-
-> **Note**: If you encounter API issues, verify your `API_KEY` and ensure sufficient credits. Use [tool-bless_u-LLM-api-test](./pre-process/tool-bless_u-LLM-api-test.ipynb) for troubleshooting.
-
-**2.2 Intermediate output** is stored in [all_contexts.json](./data/all_contexts.json).
-
-<br>
-<br>
-
-## **3.Choosing a Word Embedding Model**
-
-This section explores whether pre-trained or fine-tuned word embedding models are best suited for achieving high cosine similarity scores in Neo4j's `gds.similarity.cosine` function. Our findings suggest that a pre-trained model like `ckiplab/bert-base-chinese` performs well, although further optimization might be possible.
-
-**3.1 Pre-trained vs. Fine-tuned Models**
-
-While fine-tuning a model can potentially improve performance on specific tasks, our experiments indicate that a pre-trained model is sufficient for our current needs. Fine-tuned models exhibited higher validation loss, suggesting potential issues with overfitting or data quality.
-
-**3.2 Training Results**
-
-Detailed implementation and results of the fine-tuning experiments can be found in the following files:
-
-* Training notebook: [step3-bless_u-model-fine-tuning.ipynb](./pre-process/step3-bless_u-model-fine-tuning.ipynb)
-* Performance analysis: [BERT.md](./BERT.md)
-
-**3.3 Visualize metrics per epoch**
-
-The following charts provide a visual comparison of training and validation losses for the fine-tuned models:
-
-* **Training Loss:** ![Image of training_results_loss.png](./images/training_results_loss.png)
-* **Validation Loss:** ![Image of training_results_eval.png](./images/training_results_eval.png)
-
-<br>
-<br>
-
-## **4.Neo4j Graph Database Design**
-
-Since text embedding and similarity search algorithm is decided, now, we expect get advantage on exporting all the poem data and future prompt Q&As, Neo4j database itself can directly compute similairty in the database end, providing similair prompts on the same poem from the history.
+## Architecture
 
 ![Neo4j Design](./images/neo4j-design.png)
 
-**4.1 Export** poem data and their extended knowledge relationships into a Neo4j graph database.
+### Technology Stack
 
+| Technology | Purpose |
+|---|---|
+| **RAG** | Retrieval-Augmented Generation for grounding LLM responses |
+| **Neo4j** | Knowledge Graph database storing poem relationships |
+| **BERT** (`ckiplab/bert-base-chinese`) | Chinese-specific embeddings for similarity search |
+| **LLM** (GPT-4o / Claude 3.5) | AI-powered poem interpretation via `aisuite` |
+| **Gradio** | Interactive web interface |
+| **Next.js** | Static showcase site deployed on Vercel |
+| **BeautifulSoup** | Web scraping for poem data collection |
+| **NetworkX** | Knowledge graph visualization |
+
+### LLM Integration
+
+The system calls **GPT-4o** and **Claude 3.5 Sonnet** in parallel via `aisuite`, with a Neo4j-based caching layer that skips API calls when a similar question has been asked before (cosine similarity > 0.75).
+
+```
+User Question → Neo4j Similarity Search → Hit? → Return cached response
+                                        → Miss? → GPT-4o + Claude 3.5 → Store in Neo4j
+```
+
+> See [docs/llm_architecture.md](./docs/llm_architecture.md) for full details on the Temple class hierarchy, prompt construction, and caching strategy.
+
+### Graph+RAG: Dynamic Graph Updates
+
+When users ask questions, the graph dynamically updates in real time. New `UserPrompt` nodes are linked to poems via `HAS_PROMPT` relationships, with `purpose_embedding` and `answer_embedding` for similarity-based search using `gds.similarity.cosine`.
+
+![Neo4j Embedding Example](./images/neo4j-embedding.png)
+
+---
+
+## Preprocessing
+
+### 1. Web Crawler
+Collect data on 100 poems including text and images.
+> Implementation: [step1-bless_u-crawler](./pre-process/step1-bless_u-crawler.ipynb)
+
+**Output**: [all_chances.json](./data/all_chances.json) + knowledge graph visualizations:
+
+| Good Poems (30) | Normal Poems (50) | Bad Poems (20) |
+|---|---|---|
+| ![Good](./images/knowledge_graph_group_good_30.png) | ![Normal](./images/knowledge_graph_group_normal_50.png) | ![Bad](./images/knowledge_graph_group_bad_20.png) |
+
+### 2. LLM Poem Interpretation Expansion
+Generate additional `UserPrompt` data using LLMs.
+> Implementation: [step2-bless_u-LLM-poem-answers-gen](./pre-process/step2-bless_u-LLM-poem-answers-gen.ipynb)
+
+### 3. Word Embedding Model
+Using `ckiplab/bert-base-chinese` for cosine similarity in Neo4j.
+> Implementation: [step3-bless_u-model-fine-tuning](./pre-process/step3-bless_u-model-fine-tuning.ipynb) | [BERT.md](./BERT.md)
+
+| Training Loss | Validation Loss |
+|---|---|
+| ![Training](./images/training_results_loss.png) | ![Validation](./images/training_results_eval.png) |
+
+### 4. Neo4j Graph Database
+Export poems and relationships into Neo4j for similarity search.
 > Implementation: [step4-bless_u-neo4j](./pre-process/step4-bless_u-neo4j.ipynb)
 
-**4.2 Verify** the graph structure in the Neo4j dashboard. Below is an example showing Poem #15 and its relations:
-![Neo4j Example](./images/neo4j-poem.png)
+![Neo4j Poem Example](./images/neo4j-poem.png)
 
-**4.3 Graph Design Concepts**
+---
 
-The following key cypher queries illustrate node-edge-node relationships for each poem in Neo4j:
+## Web UI
 
-#### Create Initial Graph
-Create each poem node (we have 100 in total) and its all relationship to the other nodes.
+Execute [bless_u-chatbot-100.ipynb](./bless_u-chatbot-100.ipynb) to launch the Gradio app:
 
-```cypher
-CREATE (p1:Poem {number: 1, name: "第一首", ...})
--[:HAS_BODY]->(s1:Body {籤詩: "籤詩x4", 吉凶: "上籤", ...})
--[:HAS_EARTH_BRANCH]->(e1:EarthlyBranch {name: "子", ...})
--[:HAS_PURPOSE]->(i1:DivineIntention {purpose: "疾病", purpose_embedding: [], ...})
--[:HAS_PURPOSE_ANSWER]->(a1:PurposeAnswer {purpose: '疾病', answer: "'有驚'", answer_embedding: [], ...})
-WITH p1, e1
-MERGE (e1)-[:HAS_FIVE_ELEMENT]->(f1:FiveElement {name: "水"})
-MERGE (e1)-[:HAS_ZODIAC]->(z1:Zodiac {name: "鼠"})
+| Initial Interface | Interaction Example |
+|---|---|
+| ![Web UI](./images/webui-app.png) | ![Debug](./images/webui-debug.png) |
+
+---
+
+## Project Structure
+
+```
+.
+├── bless_u-chatbot-100.ipynb   # Main Gradio app
+├── data/
+│   ├── all_chances.json        # 100 poems with full metadata
+│   ├── all_contexts.json       # Pre-formatted RAG contexts
+│   ├── all_divine.json         # 15 divine categories + sample questions
+│   ├── chatgpt_response.json   # Cached GPT-4o responses
+│   └── claude_response.json    # Cached Claude responses
+├── images/                     # Screenshots and graph visualizations
+├── pre-process/                # Data collection & preprocessing notebooks
+├── web/                        # Next.js showcase site (Vercel deployment)
+├── Dockerfile                  # Python/Gradio container
+├── docker-compose.yml          # App + Neo4j orchestration
+└── requirements.txt            # Python dependencies
 ```
 
-#### Add User Prompt and LLM Info
-Once get a new user prompt's Q&A, let's store in the Neo4j, it could be for computing similairty based on its `purpose_embedding` and `llm_response_embedding` data.
+---
 
-```cypher
-MATCH (p:Poem {number: $poem_number})
-CREATE (up:UserPrompt {text: "求身體健康", llm_response: "good luck!", purpose_embedding: [], llm_response_embedding: []...})
--[:GENERATED_BY]->(l:LLM {model: $model, temperature: $temperature, max_tokens: $max_tokens})
-CREATE (p)-[:HAS_PROMPT]->(up)
-```
+## Contributing
 
-#### Simple Search
-To retrieve basic `poem` and its related data.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines on setting up the development environment, code style, and how to add poems or modify the graph schema.
 
-```cypher
-MATCH (p:Poem {number: 1})
-MATCH (p)-[:HAS_BODY]->(b)
-MATCH (p)-[:HAS_PURPOSE]->(i)
-MATCH (i)-[:HAS_PURPOSE_ANSWER]->(a)
-MATCH (p)-[:HAS_EARTH_BRANCH]->(e)
-MATCH (e)-[:HAS_FIVE_ELEMENTS]->(f)
-MATCH (e)-[:HAS_ZODIAC]->(z)
-RETURN p.name, b.籤名, i.purpose, a.answer, e.name as 地支, f.name as 五行, z.name as 生肖, ...
-```
+---
 
-#### **Similarity Search**
-Similairty search is the goal we built Neo4j for. As mentioned we use `gds.similarity.cosine` for searching algorithm on `purpose_embedding` field.
+## License
 
-```cypher
-MATCH (p:Poem {number: 1})-[:HAS_PROMPT]->(up:UserPrompt)
-OPTIONAL MATCH (up)-[:GENERATED_BY]->(llm:LLM)
-WITH up, llm, gds.similarity.cosine(up.purpose_embedding, $new_userprompt_embedding) AS similarity
-WHERE similarity > 0.75
-RETURN similarity, up.llm_response, llm.model...
-ORDER BY similarity DESC
-LIMIT 3
-```
-
-<br>
-<br>
-
-# Launch the Web UI
-
-## **6.Run the Gradio App**
-
-6.1 Execute [bless_u-chatbot-100](./bless_u-chatbot-100.ipynb) to launch a `Gradio` app with a 72-hour accessible weblink for testing.
-
-### **Initial Interface**
-
-![Web UI Initial View](./images/webui-app.png)
-
-### **Interaction Example**
-
-Interact with the system to receive poem interpretations and ask questions:
-![Web UI Interaction Example](./images/webui-debug.png)
-
-<br>
-<br>
+This project is licensed under the [MIT License](./LICENSE).
 
 ---
 
 **Enjoy the platform, and we look forward to getting your feedback!**
-
----

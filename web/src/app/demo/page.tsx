@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { Poem } from "@/lib/types";
 import { loadPoems } from "@/lib/poems";
 import FortuneDrawer from "@/components/FortuneDrawer";
+import AIShowcase from "@/components/AIShowcase";
 
 export default function DemoPage() {
   const [poems, setPoems] = useState<Poem[]>([]);
@@ -35,6 +36,20 @@ export default function DemoPage() {
       ) : (
         <FortuneDrawer poems={poems} />
       )}
+
+      {/* AI Response Showcase */}
+      <div className="mt-16 pt-16 border-t border-[#4a2c1a]/40">
+        <div className="text-center mb-8">
+          <h2 className="poem-text text-2xl sm:text-3xl font-bold text-[#d4a84b] mb-3">
+            AI 解籤展示
+          </h2>
+          <p className="text-[#f5efe6]/50 max-w-lg mx-auto">
+            Below are real AI responses from GPT-4o and Claude 3.5 Sonnet,
+            generated during development with different temperature settings.
+          </p>
+        </div>
+        <AIShowcase />
+      </div>
     </div>
   );
 }

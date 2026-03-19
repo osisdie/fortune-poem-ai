@@ -21,6 +21,8 @@
 
 # Bless You — RAG + Knowledge Graph + LLM Chatbot for Fortune Stick Interpretation
 
+**[中文版 README](./README.zh-TW.md)**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://python.org)
 [![Gradio](https://img.shields.io/badge/Gradio-4.0+-orange.svg)](https://gradio.app)
@@ -97,6 +99,17 @@ Visit the [Next.js showcase site](https://fortune-poem-ai.vercel.app) to browse 
 | **Next.js** | Static showcase site deployed on Vercel |
 | **BeautifulSoup** | Web scraping for poem data collection |
 | **NetworkX** | Knowledge graph visualization |
+
+### LLM Integration
+
+The system calls **GPT-4o** and **Claude 3.5 Sonnet** in parallel via `aisuite`, with a Neo4j-based caching layer that skips API calls when a similar question has been asked before (cosine similarity > 0.75).
+
+```
+User Question → Neo4j Similarity Search → Hit? → Return cached response
+                                        → Miss? → GPT-4o + Claude 3.5 → Store in Neo4j
+```
+
+> See [docs/llm_architecture.md](./docs/llm_architecture.md) for full details on the Temple class hierarchy, prompt construction, and caching strategy.
 
 ### Graph+RAG: Dynamic Graph Updates
 

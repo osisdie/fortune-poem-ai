@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    ports:
+      - "7860:7860"
+    env_file:
+      - .env
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    volumes:
+      - ./data:/app/data
+      - ./images:/app/images
+
+  neo4j:
+    image: neo4j:5-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_AUTH:-password}
+      - NEO4J_PLUGINS=["graph-data-science"]
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD", "neo4j", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  neo4j_data:
+  neo4j_logs:

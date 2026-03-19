@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  --temple-dark: #1a0f0a;
+  --temple-wood: #2c1810;
+  --temple-wood-light: #4a2c1a;
+  --temple-gold: #d4a84b;
+  --temple-gold-dim: #c9963c;
+  --temple-red: #8b2c2c;
+  --temple-red-light: #a33b3b;
+  --temple-cream: #f5efe6;
+  --temple-paper: #ede4d3;
+}
+
+@theme inline {
+  --color-background: var(--temple-dark);
+  --color-foreground: var(--temple-cream);
+  --font-sans: var(--font-noto-sans-tc);
+  --font-serif: var(--font-noto-serif-tc);
+}
+
+body {
+  background: var(--temple-dark);
+  color: var(--temple-cream);
+  font-family: var(--font-sans), "Noto Sans TC", sans-serif;
+}
+
+/* Temple-themed scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--temple-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--temple-wood-light);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--temple-gold-dim);
+}
+
+/* Poem text styling */
+.poem-text {
+  font-family: var(--font-serif), "Noto Serif TC", serif;
+  line-height: 2;
+  letter-spacing: 0.05em;
+}
+
+/* Gold shimmer animation */
+@keyframes shimmer {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.gold-shimmer {
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Stick shake animation */
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-8deg); }
+  20% { transform: rotate(8deg); }
+  30% { transform: rotate(-6deg); }
+  40% { transform: rotate(6deg); }
+  50% { transform: rotate(-4deg); }
+  60% { transform: rotate(4deg); }
+  70% { transform: rotate(-2deg); }
+  80% { transform: rotate(2deg); }
+  90% { transform: rotate(-1deg); }
+}
+
+.shake-animation {
+  animation: shake 0.8s ease-in-out;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Incense smoke */
+@keyframes smoke {
+  0% { transform: translateY(0) scaleX(1); opacity: 0.6; }
+  50% { transform: translateY(-20px) scaleX(1.2); opacity: 0.3; }
+  100% { transform: translateY(-40px) scaleX(0.8); opacity: 0; }
+}
+
+.smoke-animation {
+  animation: smoke 3s ease-out infinite;
+}

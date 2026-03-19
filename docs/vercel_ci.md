@@ -15,6 +15,42 @@
 
 ---
 
+## Prerequisites
+
+### Required
+
+| Tool | Version | Install |
+|---|---|---|
+| **Node.js** | 22.x+ | [nvm](https://github.com/nvm-sh/nvm): `nvm install 22` |
+| **npm** | 10.x+ | Bundled with Node.js |
+| **Vercel CLI** | Latest | `npm i -g vercel` or use `npx vercel` (auto-installs) |
+
+### Vercel Account Setup
+
+1. Create a free account at [vercel.com](https://vercel.com)
+2. Authenticate CLI:
+   ```bash
+   npx vercel login
+   ```
+3. Verify authentication:
+   ```bash
+   npx vercel whoami
+   ```
+
+### Project Dependencies
+
+Before deploying, ensure the Next.js app builds locally:
+
+```bash
+cd web
+npm ci          # Install dependencies from lock file
+npm run build   # Verify production build passes
+```
+
+> **Note**: `npx vercel` will auto-install the Vercel CLI if not globally installed. No need to `npm i -g vercel` unless you prefer a persistent installation.
+
+---
+
 ## Lessons Learned
 
 ### 1. Project Name Defaults to Directory Name

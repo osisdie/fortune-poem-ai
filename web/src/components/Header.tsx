@@ -34,7 +34,7 @@ export default function Header() {
             百首籤詩 Gallery
           </Link>
           <a
-            href="https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot"
+            href="https://github.com/osisdie/fortune-poem-ai"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 rounded-lg border border-[#4a2c1a] px-3 py-1.5 text-sm text-[#f5efe6]/70 hover:border-[#d4a84b]/50 hover:text-[#d4a84b] transition-all"
@@ -80,7 +80,7 @@ export default function Header() {
             百首籤詩 Gallery
           </Link>
           <a
-            href="https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot"
+            href="https://github.com/osisdie/fortune-poem-ai"
             target="_blank"
             rel="noopener noreferrer"
             className="block text-[#f5efe6]/70 hover:text-[#d4a84b]"

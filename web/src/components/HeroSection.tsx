@@ -34,7 +34,7 @@ export default function HeroSection() {
             抽籤 Draw a Stick
           </Link>
           <a
-            href="https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot"
+            href="https://github.com/osisdie/fortune-poem-ai"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-xl border border-[#4a2c1a] px-8 py-3.5 text-lg text-[#f5efe6]/70 transition-all hover:border-[#d4a84b]/50 hover:text-[#d4a84b]"

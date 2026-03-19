@@ -105,7 +105,7 @@ export default function FortuneDrawer({ poems }: FortuneDrawerProps) {
           This demo uses pre-cached poem data from Longshan Temple. For the full
           AI-powered experience with personalized LLM interpretation, run the{" "}
           <a
-            href="https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot"
+            href="https://github.com/osisdie/fortune-poem-ai"
             className="text-[#d4a84b]/50 hover:text-[#d4a84b]"
           >
             Gradio app

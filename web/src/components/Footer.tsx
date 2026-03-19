@@ -27,7 +27,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot"
+                  href="https://github.com/osisdie/fortune-poem-ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#f5efe6]/60 hover:text-[#d4a84b] transition-colors"

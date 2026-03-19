@@ -14,8 +14,8 @@ Thank you for your interest in contributing! This project combines traditional C
 
 1. **Fork and clone** the repository
    ```bash
-   git clone https://github.com/<your-username>/bless-you-RAG-Graph-LLM-Chatbot.git
-   cd bless-you-RAG-Graph-LLM-Chatbot
+   git clone https://github.com/<your-username>/fortune-poem-ai.git
+   cd fortune-poem-ai
    ```
 
 2. **Set up environment**

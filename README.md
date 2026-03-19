@@ -27,7 +27,7 @@
 [![Neo4j](https://img.shields.io/badge/Neo4j-5.x-green.svg)](https://neo4j.com)
 [![Next.js](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org)
 
-> **[Try the Live Demo](https://bless-you-rag.vercel.app)** | Traditional Chinese fortune stick culture meets modern AI
+> **[Try the Live Demo](https://fortune-poem-ai.vercel.app)** | Traditional Chinese fortune stick culture meets modern AI
 
 ![Web UI](./images/webui-app.png)
 
@@ -49,8 +49,8 @@ Fortune stick culture, deeply rooted in Chinese-speaking societies, offers divin
 
 ```bash
 # Clone the repo
-git clone https://github.com/osisdie/bless-you-RAG-Graph-LLM-Chatbot.git
-cd bless-you-RAG-Graph-LLM-Chatbot
+git clone https://github.com/osisdie/fortune-poem-ai.git
+cd fortune-poem-ai
 
 # Configure environment
 cp .env.example .env
@@ -77,7 +77,7 @@ jupyter notebook bless_u-chatbot-100.ipynb
 
 ### Option 3: Web Demo (No setup required)
 
-Visit the [Next.js showcase site](https://bless-you-rag.vercel.app) to browse all 100 poems and try the interactive fortune-drawing demo — no API keys or database required.
+Visit the [Next.js showcase site](https://fortune-poem-ai.vercel.app) to browse all 100 poems and try the interactive fortune-drawing demo — no API keys or database required.
 
 ---
 

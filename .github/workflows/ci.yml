@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
       - run: npx tsc --noEmit
-      - run: npx next lint
+      - run: npm run lint
 
   build-frontend:
     name: Build Frontend (Next.js)

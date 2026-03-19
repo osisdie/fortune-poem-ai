@@ -18,7 +18,7 @@ lint:frontend:
     - cd web && npm ci
   script:
     - npx tsc --noEmit
-    - npx next lint
+    - npm run lint
 
 # ─── Stage 2: Build (~2min) ───────────────────
 

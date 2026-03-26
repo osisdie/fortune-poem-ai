@@ -102,3 +102,57 @@ body {
 .smoke-animation {
   animation: smoke 3s ease-out infinite;
 }
+
+/* Golden glow pulse */
+@keyframes glowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Floating lantern bob */
+@keyframes floatLantern {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float-lantern {
+  animation: floatLantern 6s ease-in-out infinite;
+}
+
+/* Enhanced incense smoke with horizontal drift */
+@keyframes incenseSmoke {
+  0% { transform: translateY(0) translateX(0) scaleX(1); opacity: 0.5; }
+  25% { transform: translateY(-20px) translateX(4px) scaleX(1.2); opacity: 0.35; }
+  50% { transform: translateY(-40px) translateX(-3px) scaleX(1.4); opacity: 0.2; }
+  75% { transform: translateY(-60px) translateX(5px) scaleX(0.9); opacity: 0.08; }
+  100% { transform: translateY(-80px) translateX(0) scaleX(0.6); opacity: 0; }
+}
+
+.incense-smoke {
+  animation: incenseSmoke 4s ease-out infinite;
+}
+
+/* Slow horizontal mist drift */
+@keyframes mistDrift {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(40px); opacity: 0.8; }
+}
+
+.mist-drift {
+  animation: mistDrift 25s ease-in-out infinite;
+}
+
+/* Hero title glow */
+.hero-title-glow {
+  text-shadow: 0 0 40px rgba(212,168,75,0.3), 0 0 80px rgba(212,168,75,0.15), 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Chinese lattice background */
+.hero-lattice-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v60M0 30h60M15 0v60M45 0v60M0 15h60M0 45h60' stroke='%234a2c1a' stroke-width='0.5' fill='none' opacity='0.5'/%3E%3Crect x='10' y='10' width='10' height='10' rx='1' stroke='%234a2c1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3Crect x='40' y='40' width='10' height='10' rx='1' stroke='%234a2c1a' stroke-width='0.3' fill='none' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}

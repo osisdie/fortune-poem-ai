@@ -17,6 +17,9 @@ const notoSerifTC = Noto_Serif_TC({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://fortune-poem-ai.vercel.app"
+  ),
   title: "Bless You - AI Fortune Stick Interpreter | 籤詩 AI 解籤",
   description:
     "Experience traditional Chinese fortune stick culture with AI-powered interpretation. 100 poems from Longshan Temple with RAG, Knowledge Graph, and LLM technology.",
@@ -35,14 +38,12 @@ export const metadata: Metadata = {
     description:
       "Traditional Chinese fortune stick culture meets modern AI. Draw a stick, read your poem, receive divine interpretation.",
     type: "website",
-    images: ["/images/webui-app.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Bless You - AI Fortune Stick Interpreter",
     description:
       "Traditional Chinese fortune stick culture meets modern AI.",
-    images: ["/images/webui-app.png"],
   },
 };
 
